@@ -1,0 +1,82 @@
+@import './styles/tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- 글로벌 ---------- */
+html, body, #root { height: 100%; }
+body {
+  background: rgb(var(--surface));
+  color: rgb(var(--text));
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection { background: rgb(var(--brand-muted)); color: rgb(var(--brand)); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: rgb(var(--surface)); }
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--edge-strong));
+  border-radius: var(--radius-xl);
+  border: 2px solid rgb(var(--surface));
+}
+::-webkit-scrollbar-thumb:hover { background: rgb(var(--brand-muted)); }
+
+/* ---------- 마크다운 프리뷰 ---------- */
+.md-view { color: rgb(var(--text)); line-height: 1.7; font-size: 0.92rem; }
+.md-view h1, .md-view h2, .md-view h3 {
+  color: rgb(var(--brand));
+  font-family: var(--font-heading);
+  font-weight: 400;
+  margin: 1.2em 0 0.5em;
+  border-bottom: 1px solid rgb(var(--edge));
+  padding-bottom: 0.25em;
+}
+.md-view h1 { font-size: 1.4rem; }
+.md-view h2 { font-size: 1.2rem; }
+.md-view h3 { font-size: 1.05rem; border-bottom: none; }
+.md-view p { margin: 0.6em 0; }
+.md-view ul, .md-view ol { padding-left: 1.4em; margin: 0.6em 0; }
+.md-view li { margin: 0.2em 0; }
+.md-view code {
+  background: rgb(var(--surface-sunken));
+  padding: 0.1em 0.4em;
+  border-radius: var(--radius-sm);
+  font-size: 0.85em;
+  color: rgb(var(--info-fg));
+}
+.md-view pre {
+  background: rgb(var(--surface-sunken));
+  padding: 0.8em;
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  font-size: 0.85em;
+}
+.md-view pre code { background: none; padding: 0; color: inherit; }
+.md-view blockquote {
+  border-left: 3px solid rgb(var(--brand));
+  padding-left: 0.8em;
+  color: rgb(var(--text-muted));
+  margin: 0.6em 0;
+}
+.md-view table {
+  border-collapse: collapse;
+  margin: 0.6em 0;
+  font-size: 0.85em;
+  width: 100%;
+}
+.md-view th, .md-view td {
+  border: 1px solid rgb(var(--edge));
+  padding: 0.4em 0.6em;
+  text-align: left;
+}
+.md-view th { background: rgb(var(--surface-sunken)); }
+.md-view a { color: rgb(var(--brand-hover)); text-decoration: underline; }
+
+/* ---------- 인쇄 ---------- */
+@media print {
+  body { background: white !important; color: black !important; }
+  .no-print { display: none !important; }
+}

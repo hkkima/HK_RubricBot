@@ -1,0 +1,34 @@
+{
+  "type": "OBJECT",
+  "properties": {
+    "title": { "type": "STRING" },
+    "totalScore": { "type": "INTEGER" },
+    "scaleType": { "type": "STRING" },
+    "criteria": {
+      "type": "ARRAY",
+      "items": {
+        "type": "OBJECT",
+        "properties": {
+          "id": { "type": "STRING" },
+          "name": { "type": "STRING" },
+          "description": { "type": "STRING" },
+          "weight": { "type": "INTEGER" },
+          "levels": {
+            "type": "ARRAY",
+            "items": {
+              "type": "OBJECT",
+              "properties": {
+                "label": { "type": "STRING" },
+                "score": { "type": "NUMBER" },
+                "descriptor": { "type": "STRING" }
+              },
+              "required": ["label", "score", "descriptor"]
+            }
+          }
+        },
+        "required": ["id", "name", "description", "weight", "levels"]
+      }
+    }
+  },
+  "required": ["title", "totalScore", "scaleType", "criteria"]
+}

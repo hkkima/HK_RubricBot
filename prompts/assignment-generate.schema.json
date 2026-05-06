@@ -1,0 +1,27 @@
+{
+  "type": "OBJECT",
+  "properties": {
+    "title": { "type": "STRING" },
+    "subject": { "type": "STRING" },
+    "audience": { "type": "STRING" },
+    "difficulty": { "type": "STRING" },
+    "objectives": { "type": "ARRAY", "items": { "type": "STRING" } },
+    "instructions": { "type": "STRING" },
+    "subtasks": {
+      "type": "ARRAY",
+      "items": {
+        "type": "OBJECT",
+        "properties": {
+          "order": { "type": "INTEGER" },
+          "title": { "type": "STRING" },
+          "description": { "type": "STRING" }
+        },
+        "required": ["order", "title", "description"]
+      }
+    },
+    "submissionFormat": { "type": "STRING" },
+    "dueDate": { "type": "STRING" },
+    "integrityNotes": { "type": "ARRAY", "items": { "type": "STRING" } }
+  },
+  "required": ["title", "objectives", "instructions", "submissionFormat", "dueDate", "integrityNotes"]
+}

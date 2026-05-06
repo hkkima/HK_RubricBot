@@ -1,0 +1,70 @@
+{
+  "providers": {
+    "gemini": {
+      "label": "Gemini",
+      "enabled": true,
+      "color": "bg-blue-600",
+      "supportsFiles": true,
+      "apiBase": "https://generativelanguage.googleapis.com/v1beta/models",
+      "models": [
+        {
+          "id": "gemini-2.5-flash",
+          "label": "Gemini 2.5 Flash",
+          "description": "빠름 · 범용 — 과제/루브릭/채점에 적합",
+          "default": true
+        },
+        {
+          "id": "gemini-2.5-pro",
+          "label": "Gemini 2.5 Pro",
+          "description": "고성능 — 복잡한 채점에 적합 (유료)"
+        }
+      ]
+    },
+    "claude": {
+      "label": "Claude",
+      "enabled": true,
+      "color": "bg-orange-500",
+      "supportsFiles": false,
+      "apiBase": "https://api.anthropic.com/v1",
+      "apiVersion": "2023-06-01",
+      "models": [
+        {
+          "id": "claude-opus-4-7",
+          "label": "Claude Opus 4.7",
+          "description": "최고 성능 — 긴 채점 리포트에 적합",
+          "default": true
+        },
+        {
+          "id": "claude-sonnet-4-6",
+          "label": "Claude Sonnet 4.6",
+          "description": "균형 — 일반 채점에 적합"
+        },
+        {
+          "id": "claude-haiku-4-5-20251001",
+          "label": "Claude Haiku 4.5",
+          "description": "빠름 · 경량 — 초안/반복 채점에 적합"
+        }
+      ]
+    },
+    "openai": {
+      "label": "GPT",
+      "enabled": true,
+      "color": "bg-emerald-600",
+      "supportsFiles": false,
+      "apiBase": "https://api.openai.com/v1",
+      "models": [
+        {
+          "id": "gpt-4o",
+          "label": "GPT-4o",
+          "description": "범용 고성능",
+          "default": true
+        },
+        {
+          "id": "gpt-4o-mini",
+          "label": "GPT-4o Mini",
+          "description": "빠름 · 경량"
+        }
+      ]
+    }
+  }
+}

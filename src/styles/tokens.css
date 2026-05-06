@@ -1,0 +1,67 @@
+/*
+ * Design Tokens — 단일 진실 소스
+ * --------------------------------------------------------------
+ * 이 파일만 수정하면 앱 전체의 색·radius가 바뀝니다.
+ * 컴포넌트는 시맨틱 이름(bg-surface, text-text-muted 등)만 사용하세요.
+ *
+ * 색상 형식: "R G B" (alpha-value용 공백 구분)
+ * 사용처: tailwind.config.js의 rgb(var(--name) / <alpha-value>)
+ */
+
+:root,
+[data-theme='light'] {
+  /* Ease Health 기반 light theme */
+  --surface:        255 254 252;  /* Cream Canvas */
+  --surface-raised: 225 244 223;  /* Keylime Wash */
+  --surface-sunken: 255 254 252;  /* Cream Canvas - 입력면 */
+  --surface-muted:  207 231 211;  /* Mint Kiss */
+
+  /* 텍스트 */
+  --text:          34 34 34;      /* Ink Text */
+  --text-muted:    51 51 51;      /* Dark Charcoal */
+  --text-subtle:   97 107 101;    /* softened neutral */
+  --text-inverted: 255 254 252;
+
+  /* 외곽선 */
+  --edge:        229 231 235;     /* Border Grey */
+  --edge-strong: 182 206 213;     /* Slate Mist */
+  --edge-subtle: 241 244 239;
+
+  /* 브랜드(주요 액션) */
+  --brand:       15 62 23;        /* Forest Green */
+  --brand-hover: 28 83 39;
+  --brand-muted: 177 219 184;     /* Mint Glaze */
+  --brand-fg:    255 254 252;
+
+  /* 성공 / 주의 / 위험 / 정보 */
+  --positive:       15 62 23;
+  --positive-fg:    15 62 23;
+  --positive-muted: 207 231 211;
+
+  --caution:       153 109 35;
+  --caution-fg:    116 75 16;
+  --caution-muted: 247 235 204;
+
+  --critical:       158 54 45;
+  --critical-fg:    124 39 32;
+  --critical-muted: 247 222 219;
+
+  --info:       86 124 135;       /* Slate Mist 계열 */
+  --info-fg:    42 76 86;
+  --info-muted: 182 206 213;
+
+  /* radius */
+  --radius-sm:  7px;
+  --radius-md:  7px;
+  --radius-lg:  7px;
+  --radius-xl:  14px;
+  --radius-2xl: 14px;
+
+  /* typography */
+  --font-ui: 'Pretendard', 'Inter', 'Suisse Intl', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Pretendard', 'Noto Serif KR', 'Playfair Display', serif;
+}
+
+[data-theme='dark'] {
+  color-scheme: light;
+}

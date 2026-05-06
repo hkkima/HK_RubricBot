@@ -1,0 +1,28 @@
+{
+  "type": "OBJECT",
+  "properties": {
+    "totalScore": { "type": "NUMBER" },
+    "maxScore": { "type": "NUMBER" },
+    "criterionScores": {
+      "type": "ARRAY",
+      "items": {
+        "type": "OBJECT",
+        "properties": {
+          "criterionId": { "type": "STRING" },
+          "criterionName": { "type": "STRING" },
+          "weight": { "type": "INTEGER" },
+          "levelLabel": { "type": "STRING" },
+          "score": { "type": "NUMBER" },
+          "comment": { "type": "STRING" },
+          "evidence": { "type": "ARRAY", "items": { "type": "STRING" } },
+          "suggestions": { "type": "ARRAY", "items": { "type": "STRING" } }
+        },
+        "required": ["criterionId", "levelLabel", "score", "comment", "evidence", "suggestions"]
+      }
+    },
+    "overallComment": { "type": "STRING" },
+    "strengths": { "type": "ARRAY", "items": { "type": "STRING" } },
+    "improvements": { "type": "ARRAY", "items": { "type": "STRING" } }
+  },
+  "required": ["totalScore", "maxScore", "criterionScores", "overallComment", "strengths", "improvements"]
+}
