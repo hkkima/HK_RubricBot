@@ -41,7 +41,7 @@ export async function generateAssignment({ provider, apiKey, modelId, direction 
 
 export async function generateRubric({ provider, apiKey, modelId, assignment, options = {}, files = [] }) {
   if (!assignment) throw new Error('assignment가 필요합니다.');
-  const { system, userTemplate, schema } = loadPromptSet('rubric-generate');
+  const { system, userTemplate, schema, variant } = loadPromptSet('rubric-generate', { variant: options.mode });
   const objectives = Array.isArray(assignment.objectives)
     ? assignment.objectives.map((o, i) => `${i + 1}. ${o}`).join('\n')
     : '';
@@ -72,6 +72,7 @@ export async function generateRubric({ provider, apiKey, modelId, assignment, op
   return {
     ...data,
     assignmentId: assignment.id || null,
+    mode: variant,
     provider,
     modelId,
   };

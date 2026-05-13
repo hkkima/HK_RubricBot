@@ -6,7 +6,8 @@ import assignmentSystem from '../../prompts/assignment-generate.system.md?raw';
 import assignmentUser from '../../prompts/assignment-generate.user.md?raw';
 import assignmentSchema from '../../prompts/assignment-generate.schema.json';
 
-import rubricSystem from '../../prompts/rubric-generate.system.md?raw';
+import rubricSystemPrecise from '../../prompts/rubric-generate.precise.system.md?raw';
+import rubricSystemLite from '../../prompts/rubric-generate.lite.system.md?raw';
 import rubricUser from '../../prompts/rubric-generate.user.md?raw';
 import rubricSchema from '../../prompts/rubric-generate.schema.json';
 
@@ -14,15 +15,29 @@ import gradingSystem from '../../prompts/grading.system.md?raw';
 import gradingUser from '../../prompts/grading.user.md?raw';
 import gradingSchema from '../../prompts/grading.schema.json';
 
+export const RUBRIC_MODES = ['precise', 'lite'];
+export const RUBRIC_MODE_DEFAULT = 'precise';
+
 const SETS = {
   'assignment-generate': { system: assignmentSystem, userTemplate: assignmentUser, schema: assignmentSchema },
-  'rubric-generate':     { system: rubricSystem,     userTemplate: rubricUser,     schema: rubricSchema },
+  'rubric-generate': {
+    userTemplate: rubricUser,
+    schema: rubricSchema,
+    systems: { precise: rubricSystemPrecise, lite: rubricSystemLite },
+    defaultVariant: RUBRIC_MODE_DEFAULT,
+  },
   'grading':             { system: gradingSystem,    userTemplate: gradingUser,    schema: gradingSchema },
 };
 
-export function loadPromptSet(name) {
+export function loadPromptSet(name, { variant } = {}) {
   const set = SETS[name];
   if (!set) throw new Error(`알 수 없는 프롬프트 세트: ${name}`);
+  if (set.systems) {
+    const key = variant || set.defaultVariant;
+    const system = set.systems[key];
+    if (!system) throw new Error(`알 수 없는 프롬프트 변형: ${name}:${variant}`);
+    return { system, userTemplate: set.userTemplate, schema: set.schema, variant: key };
+  }
   return set;
 }
 

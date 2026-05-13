@@ -15,6 +15,19 @@ const SCALE_TYPES = [
   { id: '5-level', label: '5단계 (탁월/우수/보통/미흡/매우미흡)' },
 ];
 
+const RUBRIC_MODES = [
+  {
+    id: 'precise',
+    label: '정밀 (정량 계측)',
+    desc: '수치 임계값·체크리스트 기반. 채점자 간 일치도 우선.',
+  },
+  {
+    id: 'lite',
+    label: '경량 (정성 평가)',
+    desc: '서술형 기준. 글쓰기·창의성처럼 수치화가 부자연스러운 항목용.',
+  },
+];
+
 export default function RubricGeneratePage({ modelSelector, notify, onNavigate }) {
   const { currentAssignment, setCurrentAssignment, setCurrentRubric } = useWorkflow();
 
@@ -28,6 +41,7 @@ export default function RubricGeneratePage({ modelSelector, notify, onNavigate }
   const [scaleType, setScaleType] = useState('5-level');
   const [totalScore, setTotalScore] = useState(100);
   const [criteriaHint, setCriteriaHint] = useState('');
+  const [rubricMode, setRubricMode] = useState('precise');
 
   const [rubric, setRubric] = useState(null);
 
@@ -98,7 +112,7 @@ export default function RubricGeneratePage({ modelSelector, notify, onNavigate }
       const generated = await generate({
         ...modelSelector.payload,
         assignment,
-        options: { scaleType, totalScore, criteriaHint },
+        options: { scaleType, totalScore, criteriaHint, mode: rubricMode },
         files: sourceMode === 'manual' ? manualAttachments : [],
       });
       setRubric({ ...generated, assignmentId: assignment.id });
@@ -260,6 +274,34 @@ export default function RubricGeneratePage({ modelSelector, notify, onNavigate }
             </div>
 
             <div className="space-y-4">
+              <div>
+                <label className="text-xs text-text-muted">평가 모드</label>
+                <div className="mt-1 grid grid-cols-2 gap-2">
+                  {RUBRIC_MODES.map((m) => {
+                    const selected = rubricMode === m.id;
+                    return (
+                      <button
+                        key={m.id}
+                        type="button"
+                        onClick={() => setRubricMode(m.id)}
+                        className={`text-left px-3 py-2.5 rounded-xl border transition-colors
+                          ${selected
+                            ? 'bg-brand border-brand text-brand-fg'
+                            : 'bg-surface-sunken border-edge-strong text-text-muted hover:border-text-subtle'}`}
+                      >
+                        <p className="text-xs font-semibold">{m.label}</p>
+                        <p className={`text-[11px] mt-1 leading-snug ${selected ? 'opacity-85' : 'text-text-subtle'}`}>
+                          {m.desc}
+                        </p>
+                      </button>
+                    );
+                  })}
+                </div>
+                <p className="text-[11px] text-text-subtle mt-1.5">
+                  기본값은 정밀 모드입니다. 글쓰기·창의 과제에서는 경량 모드가 더 자연스러울 수 있습니다.
+                </p>
+              </div>
+
               <div>
                 <label className="text-xs text-text-muted">척도</label>
                 <select
